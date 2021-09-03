@@ -15,17 +15,8 @@ const initialValue = {
 // and replace the necessary stateful logic from CheckoutForm with the hook
 
 const CheckoutForm = (props) => {
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [value, setStoredValue] = useForm("no-key", initialValue);
-
-  const handleChanges = (e) => {
-    setStoredValue({ ...value, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setShowSuccessMessage(true);
-  };
+  const [showSuccessMessage, values, handleChanges, handleSubmit] =
+    useForm(initialValue);
 
   return (
     <>
@@ -35,7 +26,7 @@ const CheckoutForm = (props) => {
           First Name:
           <input
             name="firstName"
-            value={value.firstName}
+            value={values.firstName}
             onChange={handleChanges}
           />
         </label>
@@ -43,7 +34,7 @@ const CheckoutForm = (props) => {
           Last Name:
           <input
             name="lastName"
-            value={value.lastName}
+            value={values.lastName}
             onChange={handleChanges}
           />
         </label>
@@ -51,21 +42,21 @@ const CheckoutForm = (props) => {
           Address:
           <input
             name="address"
-            value={value.address}
+            value={values.address}
             onChange={handleChanges}
           />
         </label>
         <label>
           City:
-          <input name="city" value={value.city} onChange={handleChanges} />
+          <input name="city" value={values.city} onChange={handleChanges} />
         </label>
         <label>
           State:
-          <input name="state" value={value.state} onChange={handleChanges} />
+          <input name="state" value={values.state} onChange={handleChanges} />
         </label>
         <label>
           Zip:
-          <input name="zip" value={value.zip} onChange={handleChanges} />
+          <input name="zip" value={values.zip} onChange={handleChanges} />
         </label>
         <button>Checkout</button>
       </form>
@@ -79,11 +70,11 @@ const CheckoutForm = (props) => {
           <br />
           <br />
           <p>
-            {value.firstName} {value.lastName}
+            {values.firstName} {values.lastName}
           </p>
-          <p>{value.address}</p>
+          <p>{values.address}</p>
           <p>
-            {value.city}, {value.state} {value.zip}
+            {values.city}, {values.state} {values.zip}
           </p>
         </div>
       )}
